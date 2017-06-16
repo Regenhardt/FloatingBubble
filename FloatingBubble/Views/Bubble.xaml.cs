@@ -1,12 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace FloatingBubble
+namespace FloatingBubble.Views
 {
     /// <summary>
     /// Interaction logic for Bubble.xaml
     /// </summary>
-    public partial class Bubble : Window
+    public partial class Bubble : Window, Interfaces.IHideShowAndCloseable
 	{
 		public Bubble()
 		{
