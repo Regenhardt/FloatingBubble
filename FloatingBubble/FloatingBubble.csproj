@@ -70,6 +70,7 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\SwitchViewsCommand.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Viewmodels\BubbleViewmodel.cs" />
     <Compile Include="Views\Bubble.xaml.cs">
       <DependentUpon>Bubble.xaml</DependentUpon>
     </Compile>
@@ -109,7 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Viewmodels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
