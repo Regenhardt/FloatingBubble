@@ -27,6 +27,7 @@ namespace FloatingBubble
         /// <summary>
         /// Breaking MVVM for simplicity!
         /// Enabling to move the bubble.
+        /// Taken from: https://stackoverflow.com/a/7418629/5757162
         /// </summary>
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
