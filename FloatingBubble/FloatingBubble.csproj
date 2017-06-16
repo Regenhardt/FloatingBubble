@@ -70,6 +70,7 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\SwitchViewsCommand.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Interfaces\ICloseable.cs" />
     <Compile Include="Viewmodels\BubbleViewmodel.cs" />
     <Compile Include="Views\Bubble.xaml.cs">
       <DependentUpon>Bubble.xaml</DependentUpon>
