@@ -8,5 +8,9 @@ namespace FloatingBubble.Viewmodels
 {
     class BubbleViewmodel
     {
+        public BubbleViewmodel()
+        {
+
+        }
     }
 }
