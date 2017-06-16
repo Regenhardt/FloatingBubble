@@ -9,7 +9,24 @@ namespace FloatingBubble.Commands
     /// <summary>
     /// 
     /// </summary>
-    class SwitchViewsCommand
+    class SwitchViewsCommand : BaseCommand
     {
+        /// <summary>
+        /// Command to switch between the button and the "chat overlay"
+        /// </summary>
+        /// <param name="viewModel">The viewmodel containing buisnesslogic for this command</param>
+        public SwitchViewsCommand(object viewModel) : base(viewModel)
+        {
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Execute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
