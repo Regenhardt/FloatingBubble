@@ -23,5 +23,15 @@ namespace FloatingBubble
 		{
 			InitializeComponent();
 		}
-	}
+
+        /// <summary>
+        /// Breaking MVVM for simplicity!
+        /// Enabling to move the bubble.
+        /// </summary>
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+    }
 }

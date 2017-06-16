@@ -9,7 +9,7 @@
 		WindowStyle="None"
 		AllowsTransparency="True"
 		Background="Transparent">
-	<Grid>
+	<Grid MouseDown="Grid_MouseDown">
 		<Grid.Background>
 			<ImageBrush ImageSource="/Images/TransparentBubble56px.png" />
 		</Grid.Background>
