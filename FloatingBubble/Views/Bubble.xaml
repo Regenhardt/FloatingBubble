@@ -8,8 +8,17 @@
 		Title="Bubble" Height="56" Width="56"
 		WindowStyle="None"
 		AllowsTransparency="True"
-		Background="Transparent">
+		Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False">
 	<Grid MouseDown="Grid_MouseDown">
+        <!--Bind keyinputs-->
+        <Grid.InputBindings>
+            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding SwitchViews}"/>
+            <!--TODO: research, maybe we can bind to mouse_down-->
+        </Grid.InputBindings>
+        
+        <!--The bubble-->
 		<Grid.Background>
 			<ImageBrush ImageSource="/Images/TransparentBubble56px.png" />
 		</Grid.Background>
