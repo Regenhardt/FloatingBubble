@@ -20,10 +20,21 @@ namespace FloatingBubble
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            MessageBox.Show("Unexpected error occured.");
-            //TODO: LOG it and think of a good way to handle it
-
+        {            
+            //if the exception is caused due to missing implementation.
+            if (e.Exception is NotImplementedException)
+            {
+                string msg = "This area is still under construction!\r\nCheck back again later!";
+                MessageBox.Show(msg, "Under construction", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //TODO: log it
+                
+                e.Handled = true;
+            }
+            else
+            {
+                MessageBox.Show("Unexpected error occured.");
+                //TODO: LOG it and think of a good way to handle it
+            }
         }
     }
 }
