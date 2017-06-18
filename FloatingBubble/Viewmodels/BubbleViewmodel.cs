@@ -16,17 +16,30 @@ namespace FloatingBubble.Viewmodels
             CanExecuteSwitchViewsCommand = true;
         }
 
+		
+		public bool IsVisibile
+		{
+			get
+			{
+				return App.ShowBubble;
+			}
+		}
 
 
-        #region [ SwitchViewsCommand ]
 
-        public SwitchViewsCommand SwitchViews { get; private set; }
+
+		#region [ SwitchViewsCommand ]
+
+		public SwitchViewsCommand SwitchViews { get; private set; }
 			
         public bool CanExecuteSwitchViewsCommand { get; internal set; }
 
-        public void ExecuteSwitchViewsCommand()
+        public void ExecuteSwitchViewsCommand(object parameter)
         {
-            throw new NotImplementedException();
+            var args = (Interfaces.IHideShowAndCloseable[])parameter;
+
+            args[0].Hide();
+            args[1].Show();
         }
 
         #endregion

@@ -10,7 +10,12 @@
 		AllowsTransparency="True"
 		Background="Transparent"
         Topmost="True"
-        ShowInTaskbar="False">
+        ShowInTaskbar="False"
+        Visibility="{Binding IsVisibile, Converter={StaticResource BoolToVis}}"
+        >
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
 	<Grid MouseDown="Grid_MouseDown">
         <!--Bind keyinputs-->
         <Grid.InputBindings>
