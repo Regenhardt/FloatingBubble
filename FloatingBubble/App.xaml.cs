@@ -11,6 +11,21 @@ namespace FloatingBubble
     public partial class App : Application, INotifyPropertyChanged
     {
         /// <summary>
+        /// Startup location for the app
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            //instnatie the view
+            var bubble = new Views.Bubble();
+            
+
+            //show the bubble
+            bubble.Show();
+        }
+
+        /// <summary>
         /// Any exection that isn't caught by the application will be handled here
         /// </summary>
         /// <param name="sender"></param>
@@ -66,7 +81,6 @@ namespace FloatingBubble
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #endregion
-
+        #endregion        
     }
 }
