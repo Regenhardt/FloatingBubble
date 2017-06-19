@@ -19,7 +19,7 @@ namespace FloatingBubble
         {
             //instnatie the view
             var bubble = new Views.Bubble();
-            
+            var program = new Views.ProgramView();
 
             //show the bubble
             bubble.Show();
