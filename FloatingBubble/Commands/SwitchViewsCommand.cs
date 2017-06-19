@@ -21,12 +21,12 @@ namespace FloatingBubble.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return ((Viewmodels.BubbleViewmodel)object).CanExecuteSwitchViewsCommand;
+            return ((Viewmodels.BubbleViewmodel)_viewmodel).CanExecuteSwitchViewsCommand;
         }
 
         public override void Execute(object parameter)
         {
-            ((Viewmodels.BubbleViewmodel)object).ExecuteSwitchViewsCommand();
+            ((Viewmodels.BubbleViewmodel)_viewmodel).ExecuteSwitchViewsCommand(parameter);
         }
     }
 }
