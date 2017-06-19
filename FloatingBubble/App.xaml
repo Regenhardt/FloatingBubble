@@ -4,8 +4,6 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:FloatingBubble"
              StartupUri="Views/Bubble.xaml"
-             DispatcherUnhandledException="Application_DispatcherUnhandledException">
-    <Application.Resources>
-        <system:Boolean x:Key="ShowBubble" x:FieldModifier="false"/>
-    </Application.Resources>
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
+             >
 </Application>

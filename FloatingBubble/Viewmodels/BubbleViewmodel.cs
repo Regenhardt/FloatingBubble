@@ -14,16 +14,31 @@ namespace FloatingBubble.Viewmodels
 
             this.SwitchViews = new SwitchViewsCommand(this);
             CanExecuteSwitchViewsCommand = true;
+
+            //bind to the application
+            ((App) System.Windows.Application.Current).PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "ShowBubble")
+                    RaisePropertyChanged("IsVisibile");
+            };
         }
 
 		
 		public bool IsVisibile
 		{
 			get
-			{
-				return App.ShowBubble;
-			}
-		}
+			{                
+				return ((App) System.Windows.Application.Current).ShowBubble;
+			}            
+            set
+            {
+                /*
+                    Binding to visibilitiy requiers a two way mode
+                    Thats why i've added a setter wich does not do anything
+                    Because where i am binding to this property, iw ould never set, only read.
+                */
+            }
+        }
 
 
 
@@ -36,10 +51,7 @@ namespace FloatingBubble.Viewmodels
 
         public void ExecuteSwitchViewsCommand(object parameter)
         {
-            var args = (Interfaces.IHideShowAndCloseable[])parameter;
-
-            args[0].Hide();
-            args[1].Show();
+            ((App)System.Windows.Application.Current).ShowBubble = !((App)System.Windows.Application.Current).ShowBubble;
         }
 
         #endregion

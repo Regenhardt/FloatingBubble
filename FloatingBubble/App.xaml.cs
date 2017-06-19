@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace FloatingBubble
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application, INotifyPropertyChanged
     {
         /// <summary>
         /// Any exection that isn't caught by the application will be handled here
@@ -38,13 +33,40 @@ namespace FloatingBubble
             }
         }
 
-		private int myVar;
+        //show bubble by default
+        bool showBubble = true;
 
-		public int MyProperty
-		{
-			get { return myVar; }
-			set { myVar = value; }
-		}
+        /// <summary>
+        /// boolean value to determin wether to show the bubble or sth else
+        /// </summary>
+        public bool ShowBubble
+        {
+            get
+            {
+                return showBubble;
+            }
+            set
+            {
+                if (showBubble != value)
+                {
+                    showBubble = value;
+                    RaisePropertyChanged("ShowBubble");
+                }
+            }
+        }
 
-	}
+
+        #region [ INotifyPropertyChanged Members ]
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+    }
 }

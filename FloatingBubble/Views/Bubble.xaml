@@ -11,12 +11,17 @@
 		Background="Transparent"
         Topmost="True"
         ShowInTaskbar="False"
-        Visibility="{Binding IsVisibile, Converter={StaticResource BoolToVis}}"
+        
         >
+    <!--Visibility="{Binding IsVisibile, Converter={StaticResource BoolToVis}, Mode=OneWay}"-->
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
-	<Grid MouseDown="Grid_MouseDown">
+    <Window.Visibility>
+        <Binding Path="IsVisibile" Converter="{StaticResource BoolToVis}" Mode="TwoWay"/>
+    </Window.Visibility>
+    
+    <Grid MouseDown="Grid_MouseDown">
         <!--Bind keyinputs-->
         <Grid.InputBindings>
             <MouseBinding Gesture="LeftDoubleClick" Command="{Binding SwitchViews}"/>
