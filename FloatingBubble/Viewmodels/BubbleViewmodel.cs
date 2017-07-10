@@ -4,58 +4,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FloatingBubble.Viewmodels
 {
-    class BubbleViewmodel : BaseNotify
-    {
-        public BubbleViewmodel()
-        {
+	public class BubbleViewmodel : BaseNotify
+	{
 
-            this.SwitchViews = new SwitchViewsCommand(this);
-            CanExecuteSwitchViewsCommand = true;
+		#region [ Fields ]
 
-            //bind to the application
-            ((App) System.Windows.Application.Current).PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == "ShowBubble")
-                    RaisePropertyChanged("IsVisibile");
-            };
-        }
+		#endregion
 
-		
-		public bool IsVisibile
+		#region [ Properties ]
+
+		public bool BubbleVisible
 		{
-			get
-			{                
-				return ((App) System.Windows.Application.Current).ShowBubble;
-			}            
-            set
-            {
-                /*
-                    Binding to visibilitiy requiers a two way mode
-                    Thats why i've added a setter wich does not do anything
-                    Because where i am binding to this property, iw ould never set, only read.
-                */
-            }
-        }
+			get => bubbleVisible;
+			set
+			{
+				bubbleVisible = value;
+				RaisePropertyChanged(nameof(BubbleVisible));
+			}
+		}
+		private bool bubbleVisible;
 
+		#endregion
 
-
+		#region [ Commands ]
 
 		#region [ SwitchViewsCommand ]
 
-		public SwitchViewsCommand SwitchViews { get; private set; }
-			
-        public bool CanExecuteSwitchViewsCommand { get; internal set; }
 
-        public void ExecuteSwitchViewsCommand(object parameter)
-        {
-            ((App)System.Windows.Application.Current).ShowBubble = !((App)System.Windows.Application.Current).ShowBubble;
-        }
-
-        #endregion
+		public ICommand SwitchViews
+		{
+			get { return switchViews ?? (switchViews = new RelayCommand((o) => BubbleVisible = !BubbleVisible)); }
+			set => switchViews = value;
+		}
+		private ICommand switchViews;
 
 
-    }
+		#endregion
+
+		#endregion
+
+		#region [ Constructors ]
+
+		public BubbleViewmodel()
+		{
+		
+			//bind to the application
+			((App)System.Windows.Application.Current).PropertyChanged += (s, e) =>
+		   {
+			   if (e.PropertyName == "ShowBubble")
+				   RaisePropertyChanged("IsVisibile");
+		   };
+		}
+
+		#endregion
+
+
+
+
+
+
+	}
 }

@@ -3,34 +3,50 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:FloatingBubble.Views"
+		xmlns:converters="clr-namespace:FloatingBubble.Converters"
+		xmlns:viewmodels="clr-namespace:FloatingBubble.Viewmodels"
 		mc:Ignorable="d"
-		Title="Bubble" Height="56" Width="56"
+		Title="Bubble" Height="250" Width="400"
 		WindowStyle="None"
 		AllowsTransparency="True"
 		Background="Transparent"
-        Topmost="True"
-        ShowInTaskbar="False"
-        
-        >
-    <!--Visibility="{Binding IsVisibile, Converter={StaticResource BoolToVis}, Mode=OneWay}"-->
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
-    </Window.Resources>
-    <Window.Visibility>
-        <Binding Path="IsVisibile" Converter="{StaticResource BoolToVis}" Mode="TwoWay"/>
-    </Window.Visibility>
-    
-    <Grid MouseDown="Grid_MouseDown">
-        <!--Bind keyinputs-->
-        <Grid.InputBindings>
-            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding SwitchViews}"/>
-            <!--TODO: research, maybe we can bind to mouse_down-->
-        </Grid.InputBindings>
-        
-        <!--The bubble-->
-		<Grid.Background>
-			<ImageBrush ImageSource="/Images/TransparentBubble56px.png" />
-		</Grid.Background>
+		Topmost="True"
+		ShowInTaskbar="False"
+		d:DataContext="BubbleViewModel"
+			   MouseDown="Move_Bubble">
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BoolToVis" />
+		<converters:NegatedVisibilityConverter x:Key="NegatedBoolToVis" />
+	</Window.Resources>
+
+	<!-- Content -->
+	<Grid>
+		
+		<!-- Bubble -->
+		<Grid Visibility="{Binding BubbleVisible, Converter={StaticResource BoolToVis}}" Height="56" Width="56" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<!--Bind keyinputs-->
+			<Grid.InputBindings>
+				<MouseBinding Gesture="LeftClick" Command="{Binding SwitchViews}"/>
+			</Grid.InputBindings>
+
+			<!--The bubble-->
+			<Grid.Background>
+				<ImageBrush ImageSource="/Images/TransparentBubble56px.png" />
+			</Grid.Background>
+
+			<Grid Width="14" Height="14" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Move_Bubble">
+			</Grid>
+		</Grid>
+
+		<!-- Window -->
+		<Grid Visibility="{Binding BubbleVisible, Converter={StaticResource NegatedBoolToVis}}" Background="Transparent" Height="250" Width="400">
+			<!--Bind keyinputs-->
+			<Grid.InputBindings>
+				<MouseBinding Gesture="LeftClick" Command="{Binding SwitchViews}"/>
+			</Grid.InputBindings>
+			
+		</Grid>
+		
 	</Grid>
+
 </Window>

@@ -8,7 +8,7 @@ namespace FloatingBubble
 	/// Base class implementing the INotifyPropertyChanged interface.
 	/// Used for Viewmodels and Models.
 	/// </summary>
-	abstract class BaseNotify : INotifyPropertyChanged
+	public abstract class BaseNotify : INotifyPropertyChanged
 	{
 		#region [ INotifyPropertyChanged Members ]
 
