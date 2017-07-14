@@ -1,9 +1,4 @@
 ﻿using FloatingBubble.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FloatingBubble.Viewmodels
@@ -33,17 +28,24 @@ namespace FloatingBubble.Viewmodels
 		#region [ Commands ]
 
 		#region [ SwitchViewsCommand ]
+		
+		public ICommand SwitchViews => switchViews ?? (switchViews = new RelayCommand((o) => BubbleVisible = !BubbleVisible));
 
-
-		public ICommand SwitchViews
-		{
-			get { return switchViews ?? (switchViews = new RelayCommand((o) => BubbleVisible = !BubbleVisible)); }
-			set => switchViews = value;
-		}
 		private ICommand switchViews;
 
+		#endregion
+
+		#region [ EnBubbleCommand ]
+
+		/// <summary>
+		/// Closes the window into the bubble.
+		/// </summary>
+		public ICommand EnBubbleCommand => enBubbleCommand ?? (enBubbleCommand = new RelayCommand(param => BubbleVisible = true));
+
+		private ICommand enBubbleCommand;
 
 		#endregion
+
 
 		#endregion
 
@@ -61,11 +63,6 @@ namespace FloatingBubble.Viewmodels
 		}
 
 		#endregion
-
-
-
-
-
-
+		
 	}
 }

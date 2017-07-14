@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using FloatingBubble.Viewmodels;
 
 namespace FloatingBubble.Views
 {
@@ -11,8 +14,11 @@ namespace FloatingBubble.Views
 		public Bubble()
 		{
 			InitializeComponent();
+		}
 
-			this.DataContext = new Viewmodels.BubbleViewmodel();
+		public Bubble(UIElement inlay):this()
+		{
+			Holder.Children.Add(inlay);
 		}
 
 		/// <summary>
@@ -22,8 +28,13 @@ namespace FloatingBubble.Views
 		/// </summary>
 		private void Move_Bubble(object sender, MouseButtonEventArgs e)
 		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
+			this.DragMove();
+			e.Handled = true;
+		}
+
+		private void EnBubble(object sender, EventArgs e)
+		{
+			((BubbleViewmodel)DataContext).EnBubbleCommand.Execute(null);
 		}
 	}
 }

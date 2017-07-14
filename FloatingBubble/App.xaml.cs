@@ -2,13 +2,14 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
+using FloatingBubble.Views;
 
 namespace FloatingBubble
 {
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
-	public partial class App : Application, INotifyPropertyChanged
+	public partial class App : System.Windows.Application, INotifyPropertyChanged
 	{
 		/// <summary>
 		/// Startup location for the app
@@ -17,9 +18,8 @@ namespace FloatingBubble
 		/// <param name="e"></param>
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
-			//instnatie the view
-			var bubble = new Views.Bubble();
-			var program = new Views.ProgramView();
+			//instantiate the view
+			var bubble = new Views.Bubble(new Dummy());
 
 			//show the bubble
 			bubble.Show();
@@ -35,7 +35,7 @@ namespace FloatingBubble
 			//if the exception is caused due to missing implementation.
 			if (e.Exception is NotImplementedException)
 			{
-				string msg = "This area is still under construction!\r\nCheck back again later!";
+				string msg = $"This area is still under construction!{Environment.NewLine}Check back again later!";
 				MessageBox.Show(msg, "Under construction", MessageBoxButton.OK, MessageBoxImage.Warning);
 				//TODO: log it
 				

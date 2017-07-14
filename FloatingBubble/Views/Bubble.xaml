@@ -3,6 +3,7 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 		xmlns:converters="clr-namespace:FloatingBubble.Converters"
 		xmlns:viewmodels="clr-namespace:FloatingBubble.Viewmodels"
 		mc:Ignorable="d"
@@ -13,7 +14,12 @@
 		Topmost="True"
 		ShowInTaskbar="False"
 		d:DataContext="BubbleViewModel"
-			   MouseDown="Move_Bubble">
+		MouseDown="Move_Bubble"
+		>
+	<Window.DataContext>
+		<viewmodels:BubbleViewmodel />
+	</Window.DataContext>
+	
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="BoolToVis" />
 		<converters:NegatedVisibilityConverter x:Key="NegatedBoolToVis" />
@@ -22,8 +28,15 @@
 	<!-- Content -->
 	<Grid>
 		
+		<Grid Visibility="{Binding BubbleVisible, Converter={StaticResource BoolToVis}}"
+			  HorizontalAlignment="Left" VerticalAlignment="Top"
+			  Width="27" Height="24" PreviewMouseLeftButtonDown="Move_Bubble" Margin="29,0,0,32">
+		</Grid>
+		
 		<!-- Bubble -->
-		<Grid Visibility="{Binding BubbleVisible, Converter={StaticResource BoolToVis}}" Height="56" Width="56" HorizontalAlignment="Left" VerticalAlignment="Top">
+		<Grid Visibility="{Binding BubbleVisible, Converter={StaticResource BoolToVis}}" 
+			  Height="56" Width="56" HorizontalAlignment="Left" VerticalAlignment="Top">
+			
 			<!--Bind keyinputs-->
 			<Grid.InputBindings>
 				<MouseBinding Gesture="LeftClick" Command="{Binding SwitchViews}"/>
@@ -31,15 +44,22 @@
 
 			<!--The bubble-->
 			<Grid.Background>
-				<ImageBrush ImageSource="/Images/TransparentBubble56px.png" />
+				<ImageBrush ImageSource="/Images/TransparentBubbleWithMoveCorner56px.png" />
 			</Grid.Background>
 
-			<Grid Width="14" Height="14" HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeftButtonDown="Move_Bubble">
-			</Grid>
 		</Grid>
 
 		<!-- Window -->
-		<Grid Visibility="{Binding BubbleVisible, Converter={StaticResource NegatedBoolToVis}}" Background="Transparent" Height="250" Width="400">
+		<Grid Name="Holder" Visibility="{Binding BubbleVisible, Converter={StaticResource NegatedBoolToVis}}" 
+			  Background="Blue" Height="250" Width="400">
+			
+			<!-- EventTrigger for closing to Bubble when leaving the window -->
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="MouseLeave">
+					<i:InvokeCommandAction Command="{Binding EnBubbleCommand}" />
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+			
 			<!--Bind keyinputs-->
 			<Grid.InputBindings>
 				<MouseBinding Gesture="LeftClick" Command="{Binding SwitchViews}"/>
