@@ -53,13 +53,6 @@ namespace FloatingBubble.Viewmodels
 
 		public BubbleViewmodel()
 		{
-		
-			//bind to the application
-			((App)System.Windows.Application.Current).PropertyChanged += (s, e) =>
-		   {
-			   if (e.PropertyName == "ShowBubble")
-				   RaisePropertyChanged("IsVisibile");
-		   };
 		}
 
 		#endregion

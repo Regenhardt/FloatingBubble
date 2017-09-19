@@ -61,12 +61,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\NegatedVisibilityConverter.cs" />
-    <Compile Include="Viewmodels\ProgramViewmodel.cs" />
     <Compile Include="Views\Dummy.xaml.cs">
       <DependentUpon>Dummy.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProgramView.xaml.cs">
-      <DependentUpon>ProgramView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Bubble.xaml">
       <SubType>Designer</SubType>
@@ -80,16 +76,11 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\SwitchViewsCommand.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
-    <Compile Include="Interfaces\IHideShowAndCloseable.cs" />
     <Compile Include="Viewmodels\BubbleViewmodel.cs" />
     <Compile Include="Views\Bubble.xaml.cs">
       <DependentUpon>Bubble.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Dummy.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProgramView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,13 +112,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\TransparentBubble56px.png" />
+    <EmbeddedResource Include="Images\TransparentBubble56px.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interfaces\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\TransparentBubbleWithMoveCorner56px.png" />
+    <EmbeddedResource Include="Images\TransparentBubbleWithMoveCorner56px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
